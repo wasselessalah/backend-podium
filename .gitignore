@@ -1,0 +1,162 @@
+# ===================================
+# Dependencies
+# ===================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ===================================
+# Environment variables & Config
+# ===================================
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.json
+
+# ===================================
+# Logs
+# ===================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ===================================
+# Runtime data
+# ===================================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ===================================
+# Coverage & Testing
+# ===================================
+lib-cov/
+coverage/
+*.lcov
+.nyc_output/
+.coverage/
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# ===================================
+# Build & Distribution
+# ===================================
+build/
+dist/
+*.tgz
+*.tar.gz
+
+# ===================================
+# Cache directories
+# ===================================
+.npm/
+.eslintcache
+.stylelintcache
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.fusebox/
+
+# ===================================
+# Database
+# ===================================
+*.sqlite
+*.sqlite3
+*.db
+dump.rdb
+mongodb-data/
+data/
+
+# ===================================
+# IDE & Editors
+# ===================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# ===================================
+# OS generated files
+# ===================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ===================================
+# Temporary files
+# ===================================
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ===================================
+# Optional files
+# ===================================
+.npm
+.eslintrc.local.js
+.node_repl_history
+.yarn-integrity
+jspm_packages/
+
+# ===================================
+# Docker
+# ===================================
+.dockerignore
+docker-compose.override.yml
+
+# ===================================
+# Deployment & CI/CD
+# ===================================
+.vercel
+.netlify/
+.firebase/
+
+# ===================================
+# Backup files
+# ===================================
+*.bak
+*.backup
+*.old
+
+# ===================================
+# Security & Keys
+# ===================================
+*.pem
+*.key
+*.crt
+*.p12
+.ssh/
+
+# ===================================
+# Package managers
+# ===================================
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
