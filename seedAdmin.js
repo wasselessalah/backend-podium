@@ -42,7 +42,7 @@ async function seedAdmin() {
     console.log("⚠️  IMPORTANT: Changez ce mot de passe en production!");
     console.log("");
     console.log("🌐 Accédez au dashboard admin:");
-    console.log("http://localhost:3001/admin/login");
+    console.log("https://frontend-podium.vercel.app/admin/login");
 
     process.exit(0);
   } catch (error) {
