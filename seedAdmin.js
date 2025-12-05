@@ -3,7 +3,7 @@ require("dotenv").config();
 const Admin = require("./models/Admin");
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/podium_dev";
+  process.env.MONGODB_URI || "mongodb+srv://smootmri_db_user:mJ2bGkGp5GtRsULN@cluster1.jlxlx6j.mongodb.net/podium";
 
 async function seedAdmin() {
   try {
