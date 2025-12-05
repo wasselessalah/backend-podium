@@ -1,3 +1,9 @@
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+
+const JWT_SECRET =
+  process.env.JWT_SECRET || "your-secret-key-change-in-production";
+
 // Request logging middleware
 const requestLogger = (req, res, next) => {
   const timestamp = new Date().toISOString();
@@ -5,24 +11,43 @@ const requestLogger = (req, res, next) => {
   next();
 };
 
-// Authentication middleware (example)
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+// Authentication middleware for users
+const authenticateToken = async (req, res, next) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
 
-  if (!token) {
-    return res.status(401).json({ 
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        error: "Token d'accès requis",
+      });
+    }
+
+    // Vérifier le token JWT
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    // Récupérer l'utilisateur
+    const user = await User.findById(decoded.userId).select("-password");
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "Utilisateur non trouvé",
+      });
+    }
+
+    req.user = { id: user._id.toString(), username: user.username };
+    next();
+  } catch (error) {
+    return res.status(401).json({
       success: false,
-      error: 'Access token is required' 
+      error: "Token invalide ou expiré",
     });
   }
-
-  // Here you would verify the JWT token
-  // For now, just pass through
-  next();
 };
 
 module.exports = {
   requestLogger,
-  authenticateToken
+  authenticateToken,
 };

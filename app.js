@@ -1,9 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
 // Import de la connexion à la base de données
-const connectDB = require('./config/database');
+const connectDB = require("./config/database");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 3000;
 connectDB();
 
 // Import routes
-const podiumRoutes = require('./routes/podium');
+const { router: authRoutes } = require("./routes/auth");
+const userRoutes = require("./routes/users");
+const teamRoutes = require("./routes/teams");
 
 // Middleware
 app.use(cors());
@@ -20,37 +22,39 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Backend server is running!',
-    timestamp: new Date().toISOString()
+app.get("/", (req, res) => {
+  res.json({
+    message: "Backend server is running!",
+    timestamp: new Date().toISOString(),
   });
 });
 
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK',
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "OK",
     uptime: process.uptime(),
-    memory: process.memoryUsage()
+    memory: process.memoryUsage(),
   });
 });
 
 // API Routes
-app.use('/api/podium', podiumRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/teams", teamRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({
-    error: 'Something went wrong!',
-    message: err.message
+    error: "Something went wrong!",
+    message: err.message,
   });
 });
 
 // 404 handler
-app.use('*', (req, res) => {
+app.use("*", (req, res) => {
   res.status(404).json({
-    error: 'Route not found'
+    error: "Route not found",
   });
 });
 
