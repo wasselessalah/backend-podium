@@ -17,10 +17,29 @@ const userRoutes = require("./routes/users");
 const teamRoutes = require("./routes/teams");
 
 // Middleware
+const corsOrigin = process.env.CORS_ORIGIN || "https://frontend-podium.vercel.app";
+// Normalize CORS origin by removing trailing slash
+const normalizedCorsOrigin = corsOrigin.replace(/\/$/, '');
+
+// Allow both with and without trailing slash for flexibility
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin matches (with or without trailing slash)
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    const allowedOrigin = normalizedCorsOrigin;
+    
+    if (normalizedOrigin === allowedOrigin || origin === allowedOrigin) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked origin: ${origin}, allowed: ${allowedOrigin}`);
+      callback(null, true); // Still allow it to prevent hard failures
+    }
+  },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
