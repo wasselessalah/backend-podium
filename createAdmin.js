@@ -14,7 +14,7 @@ async function createSuperAdmin() {
   try {
     console.log("🔄 Connexion à MongoDB...");
     await mongoose.connect(
-      process.env.MONGODB_URI || "mongodb://localhost:27017/podium"
+      process.env.MONGODB_URI || "mongodb+srv://smootmri_db_user:mJ2bGkGp5GtRsULN@cluster1.jlxlx6j.mongodb.net/podium"
     );
     console.log("✅ Connecté à MongoDB");
 

@@ -4,7 +4,7 @@ const Admin = require("./models/Admin");
 async function checkAdmins() {
   try {
     console.log("🔄 Connexion à MongoDB...");
-    await mongoose.connect("mongodb://localhost:27017/podium");
+    await mongoose.connect("mongodb+srv://smootmri_db_user:mJ2bGkGp5GtRsULN@cluster1.jlxlx6j.mongodb.net/podium");
     console.log("✅ Connecté à MongoDB\n");
 
     const admins = await Admin.find();
